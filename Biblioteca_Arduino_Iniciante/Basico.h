@@ -209,16 +209,20 @@ class PonteH {
   in4 = 0;
   ena = 0;
   public:
-  void ligarMotores(int s1,int s2,int s3, int s4){
-    pinIN1 = s1;
-    pinIN2 = s2;
-    pinIN3 = s3;
-    pinIN4 = s4;
+  void ligarMotores(int s6,int s1,int s2, int s3, int s4, int s5){
+    in1 = s1;
+    in2 = s2;
+    in3 = s3;
+    in4 = s4;
+    enb = s5;
+    ena = s6;
 
-    pinMode(pinIN1,OUTPUT);
-    pinMode(pinIN2,OUTPUT);
-    pinMode(pinIN3,OUTPUT);
-    pinMode(pinIN4,OUTPUT);
+    pinMode(ena,INPUT);
+    pinMode(enb,INPUT);
+    pinMode(in1,OUTPUT);
+    pinMode(in2,OUTPUT);
+    pinMode(in3,OUTPUT);
+    pinMode(in4,OUTPUT);
   }
   void frente(int pwm){
     analogWrite(ena,pwm);
