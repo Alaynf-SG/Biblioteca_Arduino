@@ -4,6 +4,7 @@
 
 #include <Arduino.h>
 #include <Servo.h>    
+#include <SoftwareSerial.h>
 
 class Led {   
   private:
@@ -197,5 +198,114 @@ class Buzzer {
       digitalWrite(pinBuzzer2, LOW);  
       delay(intervalo);       
     }
+};
+
+class PonteH {
+  private:
+  enb = 0;
+  in1 = 0;
+  in2 = 0;
+  in3 = 0;
+  in4 = 0;
+  ena = 0;
+  public:
+  void ligarMotores(int s1,int s2,int s3, int s4){
+    pinIN1 = s1;
+    pinIN2 = s2;
+    pinIN3 = s3;
+    pinIN4 = s4;
+
+    pinMode(pinIN1,OUTPUT);
+    pinMode(pinIN2,OUTPUT);
+    pinMode(pinIN3,OUTPUT);
+    pinMode(pinIN4,OUTPUT);
+  }
+  void frente(int pwm){
+    analogWrite(ena,pwm);
+    analogWrite(enb,pwm);
+    digitalWrite(in1,HIGH);
+    digitalWrite(in2,LOW);
+    digitalWrite(in3,HIGH);
+    digitalWrite(in4,LOW);
+  }
+  void tras(int pwm){
+    analogWrite(ena,pwm);
+    analogWrite(enb,pwm);
+    digitalWrite(in1,LOW);
+    digitalWrite(in2,HIGH);
+    digitalWrite(in3,LOW);
+    digitalWrite(in4,HIGH);
+  }
+  void direita(int pwm){
+    analogWrite(ena,pwm);
+    analogWrite(enb,pwm);
+    digitalWrite(in1,HIGH);
+    digitalWrite(in2,LOW);
+    digitalWrite(in3,LOW);
+    digitalWrite(in4,HIGH);
+  }
+  void esquerda(int pwm){
+  analogWrite(ena,pwm);
+    analogWrite(enb,pwm);
+    digitalWrite(in1,LOW);
+    digitalWrite(in2,HIGH);
+    digitalWrite(in3,HIGH);
+    digitalWrite(in4,LOW);
+  }
+  void parar(){
+    digitalWrite(in1,HIGH);
+    digitalWrite(in2,HIGH);
+    digitalWrite(in3,HIGH);
+    digitalWrite(in4,HIGH);
+  }
+  void frenteESQ(int pwm){
+    analogWrite(ena,pwm);
+    digitalWrite(in1,HIGH);
+    digitalWrite(in2,LOW);
+  }
+  void frenteDIR(int pwm){
+    analogWrite(enb,pwm); 
+    digitalWrite(in3,HIGH);
+    digitalWrite(in4,LOW);
+  }
+  void trasESQ(int pwm){
+    analogWrite(ena,pwm);
+   
+    digitalWrite(in1,LOW);
+    digitalWrite(in2,HIGH);
+
+  }
+  void trasDIR(int pwm){
+    analogWrite(enb,pwm);
+    digitalWrite(in3,LOW);
+    digitalWrite(in4,HIGH);
+  }
+  void pararESQ(){
+    digitalWrite(in1,HIGH);
+    digitalWrite(in2,HIGH);
+  }
+  void pararDIR(){
+    digitalWrite(in3,HIGH);
+    digitalWrite(in4,HIGH);
+  }
+};
+
+class Bluetooth {
+  private:
+  pinRX = 0;
+  pinTX = 0;
+  public:
+  void ligarBluetooth(int s1,int s2){
+    pinTX = s1;
+    pinRX = s2;
+
+    SoftwareSerial myBluetooth(pinTX,pinRX);
+
+    myBluetooth.begin(9600);
+  }
+  void lerBluetooth(){
+    char readBluetooth = myBluetooth.read();
+//  COLOQUE AQUI O QUE DESEJA QUE A FUNÇÃO FAÇA (CONDICIONAL, LAÇO DE REPETIÇÃO, LIGAAR UM LED, TANTO FAZ)
+  }
 };
 #endif // Basico
