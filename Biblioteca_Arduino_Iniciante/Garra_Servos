@@ -1,0 +1,24 @@
+void movimentarServo(int posi, int posf) {
+      Serial.println(posi);
+      Serial.println(posf);
+      if (posi <= posf) {
+        for (posi; posi <= posf; posi++) {   // Laço de repetição para fazer o Servo mover da posição que ele está
+          Serial.println("Descendo");
+          // até a posição 180° na velocidade que o usuário indicar
+          Servo1.write(posi);  // Mover o servo
+          delay(15);           // Esperar 15 milissegundos
+        }
+      } else {
+        Serial.println("DEBUG!");
+
+        for (posi; posi > posf; posi--) {   // Laço de repetição para fazer o Servo mover da posição que ele está
+          Serial.println("Subindo");
+          Serial.println(posi);
+          Serial.println(posf);
+          // até a posição 180° na velocidade que o usuário indicar
+          Servo1.write(posf);  // Mover o servo
+          delay(15);           // Esperar 15 milissegundos
+        }
+
+      }
+    }
